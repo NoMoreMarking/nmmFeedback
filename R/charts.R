@@ -180,7 +180,8 @@ genderPlot <- function(results, ylimits, ylabel) {
   p <- p + theme(axis.title.x = element_blank())
   p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
   p <- p + theme(legend.position = 'bottom')
-  p <- p + scale_fill_manual(values = c('black', 'white'))
+  p <- p + scale_fill_manual(values = c('black', 'white'), name='')
+  return(p)
 }
 
 #' Plot data with mean and confidence intervals, grouped by pupil premium
@@ -210,7 +211,7 @@ ppPlot <- function(results, ylimits, ylabel) {
   p <- p + theme(axis.title.x = element_blank())
   p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
   p <- p + theme(legend.position = 'bottom')
-  p <- p + scale_fill_manual(values = c('black', 'white'))
+  p <- p + scale_fill_manual(values = c('black', 'white'),name='')
 }
 
 
