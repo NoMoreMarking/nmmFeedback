@@ -195,7 +195,7 @@ summariseGenderPPData <- function(results){
   return(results)
 }
 
-#' Create significance statement for reports
+#' Create significance statement for reports using grades
 #'
 #' @param results results data frame
 #' @return significance statement
@@ -218,4 +218,29 @@ significanceStatement <- function(results){
   }
   return (significance.statement)
 
+}
+
+#' Create significance statement for reports using scaled scores
+#'
+#' @param results results data frame
+#' @return significance statement
+#' @examples
+#' all.significance.statement <- scoreSignificanceStatement(results)
+#' @export
+#' @import dplyr
+#' 
+scoreSignificanceStatement <- function(results){
+  mdl <- t.test(scaledScore ~ school, data = results)
+  mdl.significance <- mdl$p.value<0.05
+  if(mdl.significance){
+    if(mdl$estimate[1]>mdl$estimate[2]){
+      significance.statement <- ' significantly above that of '
+    } else {
+      significance.statement <- ' significantly below that of '
+    }
+  } else {
+    significance.statement <- ' not significantly different to '
+  }
+  return (significance.statement)
+  
 }
