@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataFunctions.R
 \name{significanceStatement}
 \alias{significanceStatement}
-\title{Create significance statement for reports}
+\title{Create significance statement for reports using grades}
 \usage{
 significanceStatement(results)
 }
@@ -13,7 +13,7 @@ significanceStatement(results)
 significance statement
 }
 \description{
-Create significance statement for reports
+Create significance statement for reports using grades
 }
 \examples{
 all.significance.statement <- significanceStatement(results)
