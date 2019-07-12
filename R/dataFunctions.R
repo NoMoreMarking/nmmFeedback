@@ -112,18 +112,17 @@ getData <- function(taskName, connStr){
 #' @export
 #' @import dplyr
 
-summariseData <- function(results){
-  results <- results %>%
-    group_by(school) %>%
+summariseData <- function(data, by, var){
+  data %>%
+    group_by({{by}}) %>%
     summarise(
       data.n=n(),
-      data.mean=mean(gradeScore,na.rm=T),
-      data.sd=sd(gradeScore,na.rm = T),
+      data.mean=mean({{var}},na.rm=T),
+      data.sd=sd({{var}},na.rm = T),
       data.se=data.sd/(data.n^0.5),
       data.ci=1.96*data.se,
       data.upper=data.mean+data.ci,
       data.lower=data.mean-data.ci)
-  return(results)
 }
 
 #' Summarise data with mean and confidence intervals, grouped on gender
