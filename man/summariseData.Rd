@@ -4,14 +4,14 @@
 \alias{summariseData}
 \title{Summarise data with mean and confidence intervals}
 \usage{
-summariseData(data, by, var)
+summariseData(data, var, ...)
 }
 \arguments{
 \item{data}{data frame}
 
-\item{by}{the name of the grouping variable}
-
 \item{var}{the name of the variable to summarise}
+
+\item{...}{the name of the grouping variable(s)}
 }
 \value{
 data frame with n, mean, sd, se, ci, upper and lower

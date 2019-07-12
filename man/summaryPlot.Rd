@@ -4,10 +4,18 @@
 \alias{summaryPlot}
 \title{Plot data with mean and confidence intervals}
 \usage{
-summaryPlot(results, ylimits, ylabel)
+summaryPlot(data, x, data.mean, data.lower, data.upper, ylimits, ylabel)
 }
 \arguments{
-\item{results}{results data frame}
+\item{data}{results data frame}
+
+\item{x}{column for x co-ordinate}
+
+\item{data.mean}{column for y co-ordinate}
+
+\item{data.lower}{column for lower error bar}
+
+\item{data.upper}{column for upper error bar}
 
 \item{ylimits}{limits for y axis}
 
@@ -20,5 +28,5 @@ plot
 Plot data with mean and confidence intervals
 }
 \examples{
-summary.data <- summaryPlot(school.results)
+summary.data <- summaryPlot(school.results, school, gradeScore, data.lower, data.upper, ylimits, ylabel)
 }

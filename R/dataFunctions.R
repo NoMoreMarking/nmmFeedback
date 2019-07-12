@@ -106,17 +106,17 @@ getData <- function(taskName, connStr){
 #' Summarise data with mean and confidence intervals
 #'
 #' @param data data frame
-#' @param by the name of the grouping variable
 #' @param var the name of the variable to summarise
+#' @param ... the name of the grouping variable(s)
 #' @return data frame with n, mean, sd, se, ci, upper and lower
 #' @examples
 #' summary.data <- summaryData(school.results, school, gradeScore)
 #' @export
 #' @import dplyr
 
-summariseData <- function(data, by, var){
+summariseData <- function(data, var, ...){
   data %>%
-    group_by({{by}}) %>%
+    group_by(...) %>%
     summarise(
       data.n=n(),
       data.mean=mean({{var}},na.rm=T),
@@ -125,75 +125,6 @@ summariseData <- function(data, by, var){
       data.ci=1.96*data.se,
       data.upper=data.mean+data.ci,
       data.lower=data.mean-data.ci)
-}
-
-#' Summarise data with mean and confidence intervals, grouped on gender
-#'
-#' @param results results data frame
-#' @return data frame with n, mean, sd, se, ci, upper and lower
-#' @examples
-#' summary.data <- summaryData(school.results)
-#' @export
-#' @import dplyr
-
-summariseGenderData <- function(results){
-  results <- results %>%
-    group_by(school,gender) %>%
-    summarise(
-      data.n=n(),
-      data.mean=mean(gradeScore,na.rm=T),
-      data.sd=sd(gradeScore,na.rm = T),
-      data.se=data.sd/(data.n^0.5),
-      data.ci=1.96*data.se,
-      data.upper=data.mean+data.ci,
-      data.lower=data.mean-data.ci)
-  return(results)
-}
-
-#' Summarise data with mean and confidence intervals, grouped on pupil premium
-#'
-#' @param results results data frame
-#' @return data frame with n, mean, sd, se, ci, upper and lower
-#' @examples
-#' summary.data <- summarisePPData(school.results)
-#' @export
-#' @import dplyr
-
-summarisePPData <- function(results){
-  results <- results %>%
-    group_by(school,pp) %>%
-    summarise(
-      data.n=n(),
-      data.mean=mean(gradeScore,na.rm=T),
-      data.sd=sd(gradeScore,na.rm = T),
-      data.se=data.sd/(data.n^0.5),
-      data.ci=1.96*data.se,
-      data.upper=data.mean+data.ci,
-      data.lower=data.mean-data.ci)
-  return(results)
-}
-
-#' Summarise data with mean and confidence intervals, grouped on gender & pupil premium
-#'
-#' @param results results data frame
-#' @return data frame with n, mean, sd, se, ci, upper and lower
-#' @examples
-#' summary.data <- summariseGenderPPData(school.results)
-#' @export
-#' @import dplyr
-
-summariseGenderPPData <- function(results){
-  results <- results %>%
-    group_by(school,gender,pp) %>%
-    summarise(
-      data.n=n(),
-      data.mean=mean(gradeScore,na.rm=T),
-      data.sd=sd(gradeScore,na.rm = T),
-      data.se=data.sd/(data.n^0.5),
-      data.ci=1.96*data.se,
-      data.upper=data.mean+data.ci,
-      data.lower=data.mean-data.ci)
-  return(results)
 }
 
 #' Create significance statement for reports using grades

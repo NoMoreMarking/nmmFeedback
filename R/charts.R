@@ -138,8 +138,8 @@ schools.detail.plot <- function(results, grade.boundaries) {
 #' @export
 #' @import ggplot2
 #'
-summaryPlot <- function(data, x, data.mean,data.lower, data.upper, ylimits, ylabel) {
-  p <- ggplot(results, aes(x = {{x}}, y = {{data.mean}}))
+summaryPlot <- function(data, x, data.mean, data.lower, data.upper, ylimits, ylabel) {
+  p <- ggplot(data, aes(x = {{x}}, y = {{data.mean}}))
   p <-
     p + geom_errorbar(aes(ymin = {{data.lower}}, ymax = {{data.upper}}), width = 0.2)
   p <-
