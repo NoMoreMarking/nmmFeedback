@@ -105,10 +105,12 @@ getData <- function(taskName, connStr){
 
 #' Summarise data with mean and confidence intervals, grouped on school
 #'
-#' @param results results data frame
+#' @param data data frame
+#' @param by the name of the grouping variable
+#' @param var the name of the variable to summarise
 #' @return data frame with n, mean, sd, se, ci, upper and lower
 #' @examples
-#' summary.data <- summaryData(school.results)
+#' summary.data <- summaryData(school.results, school, gradeScore)
 #' @export
 #' @import dplyr
 
