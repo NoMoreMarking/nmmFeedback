@@ -135,11 +135,11 @@ schools.detail.plot <- function(results, grade.boundaries) {
 #' @param fill grouping variable for fill
 #' @return plot
 #' @examples
-#' p<- summaryPlot(pp.summary, ylimits=ylimits, ylabel=ylabel,x = school, fill=pp)
+#' p <- meanSePlot(pp.summary, ylimits=ylimits, ylabel=ylabel,x = school, fill=pp)
 #' @export
 #' @import ggplot2
 #'
-summaryPlot <- function(data, x, ylimits, ylabel, data.mean=data.mean, data.lower=data.lower, data.upper=data.upper,fill=NULL) {
+meanSePlot <- function(data, x, ylimits, ylabel, data.mean=data.mean, data.lower=data.lower, data.upper=data.upper,fill=NULL) {
   p <- ggplot(data, aes(x = {{x}}, y = {{data.mean}}, fill = {{fill}}))
   p <-
     p + geom_errorbar(aes(ymin = {{data.lower}}, ymax = {{data.upper}}), width = 0.2)
@@ -157,6 +157,35 @@ summaryPlot <- function(data, x, ylimits, ylabel, data.mean=data.mean, data.lowe
   p <- p + scale_fill_manual(values = c('black', 'white'), name='')
   p <- p + theme(legend.position = 'bottom')
   return(p)
+}
+
+#' Plot box and whisker of marks and grade boundaries
+#' 
+#' @param data results data frame
+#' @param x x co-ordinate column name
+#' @param y y co-ordinate column name
+#' @param yLable label for y axis
+#' @param boundaries grade boundaries data frame
+#' @param cutScores cut scores for horizontal intersect
+#' @param gradeLabels labels for cut scores
+#' 
+#' @example 
+#' p <- boxPlot(results, x=school, y=scaledScore, yLabel=mark, boundaries=displayGrades, cutScores=scaledScore, gradeLabels=gradeBoundaries)
+#' @export
+#' @import ggplot2
+#' 
+
+boxPlot <- function(data, x, y, yLabel, boundaries, cutScores, gradeLabels) {
+  # box plot of mean marks
+  p <- ggplot(data, aes(x = {{x}}, y = {{y}}))
+  p <-
+    p <- p + geom_boxplot(colour = "black", fill = "light blue")
+  p <-
+    p + geom_hline(data = boundaries, aes(yintercept = {{cutScores}}, linetype =
+    {{gradeLabels}}))
+  p <- p + scale_y_continuous(name = yLabel)
+  p <- p + theme_light()
+  p <- p + theme(axis.title.x = element_blank(), legend.title = element_blank())
 }
 
 #' Plot pupil score with error and grade boundaries
