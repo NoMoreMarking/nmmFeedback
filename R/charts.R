@@ -125,19 +125,23 @@ schools.detail.plot <- function(results, grade.boundaries) {
 
 #' Plot data with mean and confidence intervals
 #'
-#' @param results results data frame
+#' @param data results data frame
+#' @param x column for x co-ordinate
+#' @param data.mean column for y co-ordinate
+#' @param data.upper column for upper error bar
+#' @param data.lower column for lower error bar
 #' @param ylimits limits for y axis
 #' @param ylabel label for y axis
 #' @return plot
 #' @examples
-#' summary.data <- summaryPlot(school.results)
+#' summary.data <- summaryPlot(school.results, school, gradeScore, data.lower, data.upper, ylimits, ylabel)
 #' @export
 #' @import ggplot2
 #'
-summaryPlot <- function(results, ylimits, ylabel) {
-  p <- ggplot(results, aes(x = school, y = data.mean))
+summaryPlot <- function(data, x, data.mean,data.lower, data.upper, ylimits, ylabel) {
+  p <- ggplot(results, aes(x = {{x}}, y = {{data.mean}}))
   p <-
-    p + geom_errorbar(aes(ymin = data.lower, ymax = data.upper), width = 0.2)
+    p + geom_errorbar(aes(ymin = {{data.lower}}, ymax = {{data.upper}}), width = 0.2)
   p <-
     p + geom_point(
       shape = 21,

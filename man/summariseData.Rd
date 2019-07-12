@@ -2,19 +2,23 @@
 % Please edit documentation in R/dataFunctions.R
 \name{summariseData}
 \alias{summariseData}
-\title{Summarise data with mean and confidence intervals, grouped on school}
+\title{Summarise data with mean and confidence intervals}
 \usage{
-summariseData(results)
+summariseData(data, by, var)
 }
 \arguments{
-\item{results}{results data frame}
+\item{data}{data frame}
+
+\item{by}{the name of the grouping variable}
+
+\item{var}{the name of the variable to summarise}
 }
 \value{
 data frame with n, mean, sd, se, ci, upper and lower
 }
 \description{
-Summarise data with mean and confidence intervals, grouped on school
+Summarise data with mean and confidence intervals
 }
 \examples{
-summary.data <- summaryData(school.results)
+summary.data <- summaryData(school.results, school, gradeScore)
 }
