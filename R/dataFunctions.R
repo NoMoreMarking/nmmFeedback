@@ -103,7 +103,7 @@ getData <- function(taskName, connStr){
 }
 
 
-#' Summarise data with mean and confidence intervals, grouped on school
+#' Summarise data with mean and confidence intervals
 #'
 #' @param data data frame
 #' @param by the name of the grouping variable
