@@ -4,22 +4,23 @@
 \alias{summaryPlot}
 \title{Plot data with mean and confidence intervals}
 \usage{
-summaryPlot(data, x, data.mean, data.lower, data.upper, ylimits, ylabel)
+summaryPlot(data, x, ylimits, ylabel, data.mean = data.mean,
+  data.lower = data.lower, data.upper = data.upper, fill = NULL)
 }
 \arguments{
 \item{data}{results data frame}
 
 \item{x}{column for x co-ordinate}
 
+\item{ylimits}{limits for y axis}
+
+\item{ylabel}{label for y axis}
+
 \item{data.mean}{column for y co-ordinate}
 
 \item{data.lower}{column for lower error bar}
 
 \item{data.upper}{column for upper error bar}
-
-\item{ylimits}{limits for y axis}
-
-\item{ylabel}{label for y axis}
 }
 \value{
 plot

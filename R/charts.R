@@ -132,21 +132,21 @@ schools.detail.plot <- function(results, grade.boundaries) {
 #' @param data.lower column for lower error bar
 #' @param ylimits limits for y axis
 #' @param ylabel label for y axis
+#' @param fill grouping variable for fill
 #' @return plot
 #' @examples
-#' summary.data <- summaryPlot(school.results, school, gradeScore, data.lower, data.upper, ylimits, ylabel)
+#' p<- summaryPlot(pp.summary, ylimits=ylimits, ylabel=ylabel,x = school, fill=pp)
 #' @export
 #' @import ggplot2
 #'
-summaryPlot <- function(data, x, data.mean, data.lower, data.upper, ylimits, ylabel) {
-  p <- ggplot(data, aes(x = {{x}}, y = {{data.mean}}))
+summaryPlot <- function(data, x, ylimits, ylabel, data.mean=data.mean, data.lower=data.lower, data.upper=data.upper,fill=NULL) {
+  p <- ggplot(data, aes(x = {{x}}, y = {{data.mean}}, fill = {{fill}}))
   p <-
     p + geom_errorbar(aes(ymin = {{data.lower}}, ymax = {{data.upper}}), width = 0.2)
   p <-
     p + geom_point(
       shape = 21,
       colour = "black",
-      fill = "light blue",
       size = 5,
       stroke = 1
     )
@@ -154,102 +154,10 @@ summaryPlot <- function(data, x, data.mean, data.lower, data.upper, ylimits, yla
   p <- p + theme_light()
   p <- p + theme(axis.title.x = element_blank())
   p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
-  return(p)
-}
-
-#' Plot data with mean and confidence intervals, grouped by gender
-#'
-#' @param results results data frame
-#' @param ylimits limits for y axis
-#' @param ylabel label for y axis
-#' @return plot
-#' @examples
-#' summary.data <- genderPlot(school.results)
-#' @export
-#' @import ggplot2
-#'
-genderPlot <- function(results, ylimits, ylabel) {
-  p <- ggplot(results, aes(x = school, y = data.mean, fill = gender))
-  p <-
-    p + geom_errorbar(aes(ymin = data.lower, ymax = data.upper), width = 0.2)
-  p <-
-    p + geom_point(
-      shape = 21,
-      colour = "black",
-      size = 5,
-      stroke = 1
-    )
-  p <- p + scale_shape_manual(values = 1)
-  p <- p + theme_light()
-  p <- p + theme(axis.title.x = element_blank())
-  p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
-  p <- p + theme(legend.position = 'bottom')
   p <- p + scale_fill_manual(values = c('black', 'white'), name='')
-  return(p)
-}
-
-#' Plot data with mean and confidence intervals, grouped by pupil premium
-#'
-#' @param results results data frame
-#' @param ylimits limits for y axis
-#' @param ylabel label for y axis
-#' @return plot
-#' @examples
-#' summary.data <- ppPlot(school.results)
-#' @export
-#' @import ggplot2
-#'
-ppPlot <- function(results, ylimits, ylabel) {
-  p <- ggplot(results, aes(x = school, y = data.mean, fill = pp))
-  p <-
-    p + geom_errorbar(aes(ymin = data.lower, ymax = data.upper), width = 0.2)
-  p <-
-    p + geom_point(
-      shape = 21,
-      colour = "black",
-      size = 5,
-      stroke = 1
-    )
-  p <- p + scale_shape_manual(values = 1)
-  p <- p + theme_light()
-  p <- p + theme(axis.title.x = element_blank())
-  p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
   p <- p + theme(legend.position = 'bottom')
-  p <- p + scale_fill_manual(values = c('black', 'white'),name='')
-}
-
-
-#' Plot data with mean and confidence intervals, grouped by gender & pupil premium
-#'
-#' @param results results data frame
-#' @param ylimits limits for y axis
-#' @param ylabel label for y axis
-#' @return plot
-#' @examples
-#' summary.data <- genderPPPlot(school.results)
-#' @export
-#' @import ggplot2
-#'
-genderPPPlot <- function(results, ylimits, ylabel) {
-  p <- ggplot(results, aes(x = school, y = data.mean, fill = gender))
-  p <-
-    p + geom_errorbar(aes(ymin = data.lower, ymax = data.upper), width = 0.2)
-  p <-
-    p + geom_point(
-      shape = 21,
-      colour = "black",
-      size = 5,
-      stroke = 1
-    )
-  p <- p + scale_shape_manual(values = 1)
-  p <- p + theme_light()
-  p <- p + theme(axis.title.x = element_blank(), legend.position = 'bottom')
-  p <- p + scale_y_continuous(name = ylabel, limits = ylimits)
-  p <- p + scale_fill_manual(values = c('black', 'white'))
-  p <- p + facet_wrap( ~ pp)
   return(p)
 }
-
 
 #' Plot pupil score with error and grade boundaries
 #'
