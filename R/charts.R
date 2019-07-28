@@ -169,7 +169,7 @@ meanSePlot <- function(data, x, ylimits, ylabel, data.mean=data.mean, data.lower
 #' @param cutScores cut scores for horizontal intersect
 #' @param gradeLabels labels for cut scores
 #' 
-#' @example 
+#' @examples 
 #' p <- boxPlot(results, x=school, y=scaledScore, yLabel=mark, boundaries=displayGrades, cutScores=scaledScore, gradeLabels=gradeBoundaries)
 #' @export
 #' @import ggplot2

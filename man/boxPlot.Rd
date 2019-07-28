@@ -24,3 +24,6 @@ boxPlot(data, x, y, yLabel, boundaries, cutScores, gradeLabels)
 \description{
 Plot box and whisker of marks and grade boundaries
 }
+\examples{
+p <- boxPlot(results, x=school, y=scaledScore, yLabel=mark, boundaries=displayGrades, cutScores=scaledScore, gradeLabels=gradeBoundaries)
+}
